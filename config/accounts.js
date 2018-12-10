@@ -7,22 +7,37 @@ AccountsTemplates.addFields([{
   displayName: 'username',
   required: true,
   minLength: 2,
-}, emailField, passwordField, {
-  _id: 'invitationcode',
-  type: 'text',
-  displayName: 'Invitation Code',
-  required: false,
-  minLength: 6,
-  template: 'invitationCode',
-}]);
+}, passwordField
+]);
 
 AccountsTemplates.configure({
+  // Behavior
+  confirmPassword: false,
+  enablePasswordChange: false,
+  forbidClientAccountCreation: true,
+  // overrideLoginErrors: true,
+  sendVerificationEmail: true,
+  // lowercaseUsername: false,
+  // focusFirstInput: true,
+
+  // Appearance
+  // showAddRemoveServices: false,
+  showForgotPasswordLink: false,
+  // showLabels: true,
+  // showPlaceholders: true,
+  // showResendVerificationEmailLink: false,
+
+  // Client-side Validation
+  // continuousValidation: false,
+  // negativeFeedback: false,
+  // negativeValidation: true,
+  // positiveValidation: true,
+  // positiveFeedback: true,
+  // showValidating: true,
+
   defaultLayout: 'userFormsLayout',
   defaultContentRegion: 'content',
-  confirmPassword: false,
-  enablePasswordChange: true,
-  sendVerificationEmail: true,
-  showForgotPasswordLink: true,
+  // Hooks
   onLogoutHook() {
     const homePage = 'home';
     if (FlowRouter.getRouteName() === homePage) {
@@ -33,7 +48,7 @@ AccountsTemplates.configure({
   },
 });
 
-['signIn', 'signUp', 'resetPwd', 'forgotPwd', 'enrollAccount'].forEach(
+['signIn'].forEach(
   (routeName) => AccountsTemplates.configureRoute(routeName));
 
 // We display the form to change the password in a popup window that already
@@ -43,15 +58,6 @@ AccountsTemplates.configure({
     title: {
       changePwd: '',
     },
-  },
-});
-
-AccountsTemplates.configureRoute('changePwd', {
-  redirect() {
-    // XXX We should emit a notification once we have a notification system.
-    // Currently the user has no indication that his modification has been
-    // applied.
-    Popup.back();
   },
 });
 
