@@ -6,7 +6,7 @@ Template.connectionMethod.onCreated(function() {
       // TODO : add a management of different languages
       // (ex {value: ldap, text: TAPi18n.__('ldap', {}, T9n.getLanguage() || 'en')})
       this.authenticationMethods.set([
-        {value: 'password'},
+        // {value: 'password'},
         // Gets only the authentication methods availables
         ...Object.entries(result).filter((e) => e[1]).map((e) => ({value: e[0]})),
       ]);
